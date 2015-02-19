@@ -1,0 +1,4 @@
+client/dist
+.sass-cache
+node_modules
+.env
