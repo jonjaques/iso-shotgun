@@ -2,3 +2,4 @@ client/dist
 .sass-cache
 node_modules
 .env
+client/app/templates.js

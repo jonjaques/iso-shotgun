@@ -1,25 +1,47 @@
 var gulp = require('gulp');
 var webpack = require('webpack');
+var templateCache = require('gulp-angular-templatecache');
 var sass = require('gulp-ruby-sass');
 
 gulp.task('build', ['webpack', 'sass']);
 
 gulp.task('default', ['build']);
+gulp.task('dev', ['watch']);
 
-gulp.task('webpack', function(done) {
+gulp.task('watch', function() {
+  gulp.watch([
+    'client/app/**/*.js',
+    'client/app/**/*.html'
+  ], ['webpack']);
+  gulp.watch('client/styles/**/*.scss', ['webpack']);
+});
+
+gulp.task('webpack', ['templates'], function(done) {
   var config = require('./webpack.config');
-  webpack(config, function() {
+  webpack(config, function(err, s) {
+    if (err) {
+      console.log(err);
+      done();
+      return;
+    }
+    stats = s.toJson()
+    if (stats.warnings.length) {
+      stats.warnings.forEach(console.log)
+    }
+    if (stats.errors.length) {
+      stats.errors.forEach(console.log)
+    }
     done();
   })
 });
 
-gulp.task('default', function () {
+gulp.task('templates', function () {
   return gulp.src('client/app/**/*.html')
     .pipe(templateCache({
       standalone: true,
       moduleSystem: 'Browserify'
     }))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('client/app'));
 });
 
 gulp.task('sass', function() {
