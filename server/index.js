@@ -5,7 +5,7 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     app = express(),
-    apiRouter = require('./routes/api'),
+    router = require('./routes'),
     errorHandlers = require('./routes/error');
 
 app.set('env', process.env.APPENV);
@@ -20,10 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-app.use('/api/v1', apiRouter);
-app.use('/*', function(req, res) {
-  res.sendFile(path.resolve(__dirname, '../client/index.html'));
-});
+app.use(router);
 
 // catch 404 and forward to error handler
 app.use(errorHandlers.fourohfour);
