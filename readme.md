@@ -10,7 +10,7 @@ First duplicate `.env.sample => .env`. This saves all your environment variables
 > npm install
 
 // in separate tab
-> npm start
+> npm start  // npm run-script dev  to restart server on change
 
 // build clientside app
 > gulp build  
