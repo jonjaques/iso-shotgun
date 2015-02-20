@@ -5,11 +5,11 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     app = express(),
-    // apiRouter = require('./routes/api'),
+    apiRouter = require('./routes/api'),
     errorHandlers = require('./routes/error');
 
 app.set('env', process.env.APPENV);
-app.set('views', path.join(__dirname, 'routes/views'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-// app.use('/api/v1', apiRouter);
+app.use('/api/v1', apiRouter);
 app.use('/*', function(req, res) {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
 });
