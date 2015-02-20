@@ -3,13 +3,13 @@ var $inject = ['$stateProvider', '$locationProvider']
 function RouteConfig(stateProvider, locationProvider) {
   stateProvider
     .state('app', {
-      url: '/',
+      abstract: true,
       templateUrl: 'app.html',
       controller: 'AppController',
       controllerAs: 'app'
     })
     .state('app.home', {
-      url: 'home',
+      url: '/',
       templateUrl: 'components/home/index.html',
       controller: 'HomeController',
       controllerAs: 'home'
