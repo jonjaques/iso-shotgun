@@ -8,12 +8,13 @@ gulp.task('build', ['webpack', 'sass']);
 gulp.task('default', ['build']);
 gulp.task('dev', ['watch']);
 
-gulp.task('watch', function() {
+gulp.task('watch', ['build'], function() {
   gulp.watch([
     'client/app/**/*.js',
+    'client/app/**/*.jsx',
     'client/app/**/*.html'
   ], ['webpack']);
-  gulp.watch('client/styles/**/*.scss', ['webpack']);
+  gulp.watch('client/styles/**/*.scss', ['sass']);
 });
 
 gulp.task('webpack', ['templates'], function(done) {

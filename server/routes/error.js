@@ -7,6 +7,7 @@ module.exports.fourohfour = function(req, res, next) {
 module.exports.devError = function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
+      title: 'Error',
       message: err.message,
       error: err
   });
@@ -15,6 +16,7 @@ module.exports.devError = function(err, req, res, next) {
 module.exports.prodError = function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
+      title: 'Error',
       message: err.message,
       error: {}
   });

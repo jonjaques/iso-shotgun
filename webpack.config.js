@@ -4,18 +4,26 @@ module.exports = {
   entry: "./client/app/index",
   output: {
       path: __dirname + "/client/dist/js",
-      filename: "[name].bundle.js"
+      filename: "bundle.js"
+  },
+  resolve: {
+    extensions: ["", ".webpack.js", ".web.js", ".js", ".jsx"],
+    alias: {
+      superagent: 'superagent/lib/client',
+      lib: './lib',
+      server: './server',
+      components: './client/app/components'
+    }
   },
   module: {
     loaders: [
-      { test: /angular\.js$/, loader: 'imports?jQuery=jquery!exports?window.angular' },
+      { test: /\.jsx$/, loader: 'jsx-loader?harmony' },
     ]
   },
+  externals: {
+    react: 'React'
+  },
   plugins: [
-    new webpack.ProvidePlugin({
-        angular: 'angular',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery'
-    })
+
   ]
 }
