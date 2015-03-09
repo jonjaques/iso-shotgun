@@ -18,6 +18,6 @@ module.exports.prodError = function(err, req, res, next) {
   res.render('error', {
       title: 'Error',
       message: err.message,
-      error: {}
+      error: err
   });
 }

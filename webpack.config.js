@@ -7,7 +7,7 @@ module.exports = {
       filename: "bundle.js"
   },
   resolve: {
-    extensions: ["", ".webpack.js", ".web.js", ".js", ".jsx"],
+    extensions: ["", ".webpack.js", ".web.js", ".js", ".ts"],
     alias: {
       superagent: 'superagent/lib/client',
       lib: './lib',
@@ -17,7 +17,10 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx$/, loader: 'jsx-loader?harmony' },
+      {
+        test: /\.ts$/,
+        loader: 'typescript-loader?typescriptCompiler=jsx-typescript'
+      }
     ]
   },
   externals: {

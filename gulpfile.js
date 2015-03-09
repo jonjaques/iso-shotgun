@@ -10,8 +10,7 @@ gulp.task('dev', ['watch']);
 
 gulp.task('watch', ['build'], function() {
   gulp.watch([
-    'client/app/**/*.js',
-    'client/app/**/*.jsx',
+    'client/app/**/*.ts',
     'client/app/**/*.html'
   ], ['webpack']);
   gulp.watch('client/styles/**/*.scss', ['sass']);
